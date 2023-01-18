@@ -1,7 +1,7 @@
 use crate::wrappers;
 use proc_macro::TokenStream;
 use quote::{format_ident, quote};
-use syn::{parse::ParseStream, parse_macro_input, Ident, Token, Type};
+use syn::{parse::ParseStream, parse_macro_input, Attribute, Ident, Token, Type};
 
 pub fn extendr_module(item: TokenStream) -> TokenStream {
     let module = parse_macro_input!(item as Module);
@@ -142,6 +142,8 @@ impl syn::parse::Parse for Module {
             usenames: Vec::new(),
         };
         while !input.is_empty() {
+            // ignore attributes for now
+            let _ = input.call(syn::Attribute::parse_outer)?;
             if let Ok(kmod) = input.parse::<Token![mod]>() {
                 let name: Ident = input.parse()?;
                 if res.modname.is_some() {
