@@ -155,6 +155,9 @@ pub fn call(item: TokenStream) -> TokenStream {
 
 /// Execute R code by parsing and evaluating tokens.
 ///
+/// To embed rust code in the executed R code, surround the rust code with 
+/// ``{{<rust-code}}``.
+///
 /// ```ignore
 ///     R!("c(1, 2, 3)");
 ///     R!("{{(0..3).collect_robj()}} + 1");
