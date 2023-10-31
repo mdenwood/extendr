@@ -380,7 +380,7 @@ impl<T, D> Deref for RArray<T, D> {
 
 #[cfg(test)]
 mod tests {
-    use prelude::{Rint, Rfloat, Rcplx};
+    use prelude::{Rcplx, Rfloat, Rint};
 
     use super::*;
 
