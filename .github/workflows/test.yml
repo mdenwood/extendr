@@ -133,7 +133,9 @@ jobs:
           $cargoConfig = Get-Content .cargo/config.toml
           $envIndex = $cargoConfig | Select-String -Pattern "\[env\]" | Select-Object -First 1 -ExpandProperty LineNumber
           $envIndex -= 1
-          $includeLine = @"LIBRARY_PATH = "${pwd_slash}/libgcc_mock"
+          $includeLine = @"
+          LIBRARY_PATH = "${pwd_slash}/libgcc_mock"
+          "@
           $cargoConfig = $cargoConfig[0..$envIndex] + $includeLine + $cargoConfig[($envIndex+1)..($cargoConfig.Count-1)]
 
           $cargoConfig | Set-Content .cargo/config.toml -Encoding utf8
